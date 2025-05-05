@@ -1,3 +1,8 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+---
 # Function for computation of correlations of conspecifics vs heterospecifics
 
 The function uses a non-symmetric correlation matrix (other measures of a relationship can be used as well) between the same set of species, once as seedlings (rows of the matrix), and once as adults (columns). The species absent in one of the groups are omitted. The diagonal then represents relationships of conspecific pairs, the extradiagonal relationships of the heterospecific pairs. Then we ask whether the relationships are stronger for the conspecifics (i.e. on the diagonal) than for heterospecifics. We tested this difference by the two-sample t-test and the script also provides a comparison of distribution of the correlations, because the size of the difference might be more interesting than mere results of the test (there are more reasons, why the conspecifics might be more tightly correlated than heterospecifics). Importantly, the relationships of heterospecific pairs might frequently be negative (most probably due to discordant response to local environmental variation or negative interactions between the two species), and less frequently negative also for the conspecifics, e.g. due to conspecific negative density dependence. So, if the measure of the relationship is the correlation coefficient (r), we might also want to test the general strength of the relationship. Thus, we recommend using r from the correlation matrix (to test whether the correlation is different for conspecific pairs than for heterospecific pairs, with expectation that conspecifics will be more positive), or the coefficient of determination r2 (to test, whether the relationship is stronger for the conspecifics, regardless of the direction of the relationship).
@@ -7,7 +12,7 @@ The individual elements in the matrix are not independent, so using an ordinary 
 Technically, our method is realized as an R function that accepts the input either as 1) a matrix of correlation measures (r or r2) between the two groups/stages of species (e.g. n-th row and k-th column value is the correlation of the n-th species seedling and k-th species adults) or as 2) two matrices, each for one group/stage (e.g. one for the seedlings and one for the adults), each matrix with species and corresponding values (numbers, cover, biomass…). In case of two matrices input, the script automatically computes the matrix of correlation measures. The number of null model realizations can the specified as an argument of the function. The output of the function is a data frame with the t-criterions and their p-values (based on a 95% confidence interval) from two-sample t-test of diagonal and non-diagonal correlations, means of diagonal and non-diagonal values, specification of the correlation measure (r or r2) and the numbers of the simulations (0 corresponds to the observed values). Each row of the data frame consists a summary for one generated permutation. Also, information whether the observed t-values lie within the 95% interval of the null model t-values is output. Our script also produces visualizations of the correlations among all species pairs.
 
 ## Citation
-Rychtecka, Fibich, Leps (under review process).
+Rychtecká T, Fibich P, Lepš J (in press) Variation of seedling recruitment in wet meadow species over six years: positive effects of mowing and negative effects of fertilization. Functional Ecology.
 
 ## Function head
 ```
